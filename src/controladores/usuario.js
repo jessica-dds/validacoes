@@ -5,18 +5,20 @@ const listarUsuarios = async (req, res) => {
 }
 
 const cadastrarUsuario = async (req, res) => {
-
     const { nome, email, senha } = req.body;
+    try {
+        const novoUsuario = {
+            nome,
+            email,
+            senha
+        };
 
-    const novoUsuario = {
-        nome,
-        email,
-        senha
+        usuarios.push(novoUsuario);
+
+        return res.status(201).json(novoUsuario);
+    } catch (error) {
+        return res.status(400).json({ mensagem: error.message });
     }
-
-    usuarios.push(novoUsuario);
-
-    return res.status(201).json(novoUsuario);
 }
 
 
